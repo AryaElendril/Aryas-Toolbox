@@ -1,5 +1,2 @@
-# installer-files.manifest
-
-# List one file per line with the GitHub raw file link
 https://raw.githubusercontent.com/AryaElendril/Aryas-Toolbox/main/NSOEServiceChecker.ps1
 https://raw.githubusercontent.com/AryaElendril/Aryas-Toolbox/main/NSOEGatheringTool.ps1
