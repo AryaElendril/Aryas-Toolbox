@@ -1,7 +1,7 @@
 <#
 +---------------------------------------+
-¦         Arya's Tool Box               ¦
-¦      NorthStar Service Checker        ¦
+ï¿½         Arya's Tool Box               ï¿½
+ï¿½      NorthStar Service Checker        ï¿½
 +---------------------------------------+
 #>
 
