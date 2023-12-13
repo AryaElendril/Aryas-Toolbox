@@ -1,49 +1,38 @@
 @echo off
->nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 
-REM Set debug mode
-set DEBUG=0
-
-set "filePath=C:\CBS\Scripts\NSOEServiceChecker.ps1"
-
-REM Check if the script is already installed
-if not "%DEBUG%"=="1" (
-    if exist "%filePath%" (
-        echo Script is already installed. Updating the script...
-        goto :update_script
-    )
+:: Verify admin rights
+openfiles >nul 2>&1
+if %errorlevel% neq 0 (
+   echo This script requires administrator rights. Please re-run as admin.
+   pause
+   exit
 )
 
-if not exist "C:/CBS" (
-    mkdir "C:/CBS"
+:: Create folder if needed
+if not exist "C:\CBS\Scripts" md "C:\CBS\Scripts"
+
+:: Download PS script
+curl "https://raw.githubusercontent.com/AryaElendril/Aryas-Toolbox/main/NSOEServiceChecker.ps1" -o "C:\CBS\Scripts\NSOE-Service-Checker.ps1"
+if %errorlevel% neq 0 (
+   echo Failed to download PowerShell script. 
+   pause 
+   exit /b 1
 )
 
-if not exist "C:/CBS/Scripts" (
-    mkdir "C:/CBS/Scripts"
-) else (
-    echo CBS folder already exists.
+:: Set execution policy
+powershell -command "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"
+if %errorlevel% neq 0 (
+   echo Failed to set execution policy.
+   pause
+   exit /b 1 
 )
 
-REM Download the script file
-curl -o "%filePath%" -L "https://raw.githubusercontent.com/AryaElendril/Aryas-Toolbox/main/NSOEServiceChecker.ps1"
-
-REM Check if the download was successful
-if exist "%filePath%" (
-    echo Script installed successfully.
-) else (
-    echo Failed to install the script.
+:: Run script
+powershell -File "C:\CBS\Scripts\NSOE-Service-Checker.ps1"
+if %errorlevel% neq 0 (
+   echo PowerShell script failed.
+   pause
+   exit /b 1
 )
 
-:end
-pause
-
-:update_script
-REM Download the updated script file
-curl -o "%filePath%" -L "https://raw.githubusercontent.com/AryaElendril/Aryas-Toolbox/main/NSOEServiceChecker.ps1"
-
-REM Check if the download was successful
-if exist "%filePath%" (
-    echo Script updated successfully.
-) else (
-    echo Failed to update the script.
-)
+exit /b 0
