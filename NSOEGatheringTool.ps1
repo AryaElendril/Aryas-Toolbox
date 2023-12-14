@@ -32,3 +32,8 @@ Compress-Archive -Path "$tempPath/*" -DestinationPath $zipFile
 
 # Remove temp folder
 Remove-Item -Path $tempPath -Recurse -Force
+
+Write-Host "Logs gathered and zipped to $zipFile"
+
+# Open output folder
+Invoke-Item $outputPath
