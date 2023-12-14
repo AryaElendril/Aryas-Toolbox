@@ -1,7 +1,7 @@
 <#
 +---------------------------------------+
 |         Arya's Tool Box               |
-|      NorthStar Service Checker        |
+|          Gathering Tool               |
 +---------------------------------------+
 #>
 
