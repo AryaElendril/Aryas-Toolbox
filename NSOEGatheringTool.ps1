@@ -10,7 +10,7 @@ $sourceFolder1 = "C:\Program Files\Custom Business Solutions\NorthStar Order Ent
 $sourceFolder2 = "C:\Program Files\Custom Business Solutions\NorthStar Order Entry\Log"
 
 # Set output path 
-$outputPath = "C:\CBS\GatheredOutput"
+$outputPath = "C:\CBS\Toolbox\GatheredOutput"
 
 # Create temp and output paths if needed
 If(!(Test-Path $outputPath)) {
